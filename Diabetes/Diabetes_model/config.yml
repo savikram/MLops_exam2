@@ -1,0 +1,28 @@
+package_name: Diabetes_model
+training_data_file: Training.csv
+test_data_file: Testing.csv
+pipeline_save_file: Diabetes_model_saved
+
+target: Outcome
+
+
+features: 
+  - Pregnancies
+  - Glucose
+  - BloodPressure
+  - SkinThickness
+  - Insulin
+  - BMI
+  - DiabetesPedigreeFunction
+  - Age
+
+# set train/test split
+test_size: 0.20
+
+#XGboost hyper parameters
+colsample_bytree: 0.8
+learning_rate: 0.1
+max_depth: 7
+n_estimators: 350
+scale_pos_weight: 1
+subsample: 0.7
