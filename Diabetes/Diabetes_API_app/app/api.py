@@ -26,7 +26,7 @@ def health() -> dict:
     Root Get
     """
     health = schemas.Health(
-        name=settings.PROJECT_NAME, api_version=__version__, model_version=models_version
+        name=settings.PROJECT_NAME, api_version=__version__, models_version=models_version
     )
 
     return health.dict()
