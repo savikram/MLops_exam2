@@ -24,7 +24,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: my-trained-pipeline
-        path: Diabetes_model/trained_models/*.pkl
+        path: Diabetes/Diabetes_model/trained_models/*.pkl
         retention-days: 1
 
   test:
