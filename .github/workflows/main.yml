@@ -83,9 +83,8 @@ jobs:
 
     - uses: actions/download-artifact@v2
       with:
-        name: my-build-package
-        working-directory: Diabetes
-        path: Diabetes_API_app
+        name: my-build-package        
+        path: Diabetes/Diabetes_API_app
 
     - name: Login to Docker hub
       env:
@@ -96,7 +95,9 @@ jobs:
     - name: Build the Docker image for Fastapi app
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-      run: docker build Diabetes/. -f Dockerfile -t vikramsa/diabetes-fastapi:latest
+      run: |
+        cd Diabetes/
+        docker build -f Dockerfile -t vikramsa/diabetes-fastapi:latest
 
     - name: Push the Docker Image
       env:
