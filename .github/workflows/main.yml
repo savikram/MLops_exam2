@@ -92,14 +92,11 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
     
-    - name: change to working directory
-      run: cd Diabetes/
-
     - name: Build the Docker image for Fastapi app
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
       working-directory: Diabetes
-      run: docker build -f Dockerfile -t vikramsa/diabetes-fastapi:latest
+      run: docker build Diabetes/ -f Dockerfile -t vikramsa/diabetes-fastapi:latest
 
     - name: Push the Docker Image
       env:
