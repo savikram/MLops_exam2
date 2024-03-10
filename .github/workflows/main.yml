@@ -97,9 +97,8 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
       working-directory: Diabetes
       run: |
-        pwd
-        cd Diabetes/
-        docker build Diabetes/ -f Dockerfile -t vikramsa/diabetes-fastapi:latest
+        pwd        
+        docker build . -f Dockerfile -t vikramsa/diabetes-fastapi:latest
 
     - name: Push the Docker Image
       env:
