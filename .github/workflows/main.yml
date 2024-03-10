@@ -2,7 +2,7 @@ name: Push a Docker Image
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
   
 
