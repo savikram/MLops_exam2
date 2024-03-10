@@ -4,6 +4,7 @@ on:
     branches:
       - main
   workflow_dispatch:
+  
 
 jobs:
   train:
@@ -19,11 +20,12 @@ jobs:
     - name: Install dependencies
       run: pip install -r Diabetes/requirements/requirements.txt
     - name: Train and save pipeline
-      run: python Diabetes/Diabetes_model/train_pipeline.py
+      working-directory: Diabetes
+      run: python Diabetes_model/train_pipeline.py
     - uses: actions/upload-artifact@v2
       with:
         name: my-trained-pipeline
-        path: Diabetes/Diabetes_model/trained_models/*.pkl
+        path: Diabetes_model/trained_models/*.pkl
         retention-days: 1
 
   test:
@@ -40,9 +42,11 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: my-trained-pipeline
-        path: Diabetes/Diabetes_model/trained_models
+        working-directory: Diabetes
+        path: Diabetes_model/trained_models
     - name: Install dependencies
-      run: pip install -r Diabetes/requirements/test_requirements.txt
+      working-directory: Diabetes
+      run: pip install -r requirements/test_requirements.txt
     - name: Test with pytest
       run: pytest
 
@@ -60,10 +64,12 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: my-trained-pipeline
-        path: Diabetes/Diabetes_model/trained_models
+        working-directory: Diabetes
+        path: Diabetes_model/trained_models
     - name: Install dependencies
       run: pip install --upgrade build
     - name: Build package
+      working-directory: Diabetes
       run: python -m build
     - uses: actions/upload-artifact@v2
       with:
@@ -81,7 +87,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: my-build-package
-        path: Diabetes/Diabetes_API_app
+        working-directory: Diabetes
+        path: Diabetes_API_app
 
     - name: Login to Docker hub
       env:
